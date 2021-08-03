@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror.Examples.Tanks;
 using Mirror;
 
 public class TankAI : Tank
