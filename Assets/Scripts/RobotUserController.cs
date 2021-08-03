@@ -6,11 +6,11 @@ using Mirror;
 public class RobotUserController : NetworkBehaviour
 {
     public List<Weapon> weapons = new List<Weapon>();
-    public bool shootingForTest;//ради теста
+    [SyncVar] public bool shootingForTest;//ради теста
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer) return;
+
 
         if (shootingForTest)
             for (int i = 0; i < weapons.Count; i++)
@@ -18,6 +18,15 @@ public class RobotUserController : NetworkBehaviour
     }
     public void SetShoting()
     {
+        if (!isLocalPlayer) return;
+
+        Cmd_SetShoting(!shootingForTest);
+    }
+
+    [Command]
+    public void Cmd_SetShoting(bool val)
+    {
+
         shootingForTest = !shootingForTest;
     }
 }
