@@ -34,8 +34,7 @@ public class Robot : NetworkBehaviour
 
     void FixedUpdate()
     {
-       // if (hp < 0)
-           // NetworkServer.Destroy(gameObject);
+        if (hp < 0) NetworkServer.Destroy(gameObject);
 
         if (!isLocalPlayer) return;
 
