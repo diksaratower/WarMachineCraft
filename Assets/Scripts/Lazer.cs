@@ -14,7 +14,7 @@ public class Lazer : Weapon
 
     public override IEnumerator Shoot()
     {
-        if (_state == WeaponState.shoot || _state == WeaponState.recharge) yield break;
+        if (_state != WeaponState.ready) yield break;
         _state = WeaponState.shoot;
         for (int i = 0; i < trunks.Count; i++)
         {
