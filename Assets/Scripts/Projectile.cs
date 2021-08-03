@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Mirror;
 
 public class Projectile : NetworkBehaviour
@@ -9,35 +10,29 @@ public class Projectile : NetworkBehaviour
     public float force = 1000;
     public float damage;
 
-    public override void OnStartServer()
+    protected virtual void Start()
     {
-        Invoke(nameof(DestroySelf), destroyAfter);
-    }
-
-    // set velocity for server and client. this way we don't have to sync the
-    // position, because both the server and the client simulate it.
-    void Start()
-    {
+        StartCoroutine(destroyObj());
         rigidBody.AddForce(transform.forward * force);
     }
 
-    // destroy for everyone on the server
-    [Server]
-    void DestroySelf()
+    protected IEnumerator destroyObj()
     {
-        NetworkServer.Destroy(gameObject);
+        yield return new WaitForSeconds(destroyAfter);
+        Destroy(gameObject);
     }
 
-    // ServerCallback because we don't want a warning if OnTriggerEnter is
-    // called on the client
     [ServerCallback]
-    void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<Tank>())
-            collision.gameObject.GetComponent<Tank>().hp -= damage;
-        GameObject efect = Instantiate(efectPrefab, transform.position, transform.rotation);
-        NetworkServer.Spawn(efect);
-        NetworkServer.Destroy(gameObject);
+        if (collision.gameObject.GetComponent<Robot>())
+            collision.gameObject.GetComponent<Robot>().hp -= damage;
+        if (efectPrefab)
+        {
+            GameObject efect = Instantiate(efectPrefab, transform.position, transform.rotation);
+            NetworkServer.Spawn(efect);
+        }
+        ///NetworkServer.Destroy(gameObject);
     }
 }
 

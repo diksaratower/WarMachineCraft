@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class TankAI : Tank
+public class TankAI : Robot
 {
-    [SerializeField] private Tank target;
+    [SerializeField] private Robot target;
     [SerializeField] private float stopDistance;
-
+    /*
     private void FixedUpdate()
     {
         if (!target)
         {
-            target = GameObject.FindObjectOfType<Tank>();
+            target = GameObject.FindObjectOfType<Robot>();
             return;
         }
         if (hp < 0)
@@ -56,4 +56,5 @@ public class TankAI : Tank
         }
         isShoot = false;
     }
+    */
 }

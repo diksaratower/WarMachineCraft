@@ -25,8 +25,9 @@ namespace Mirror.Examples.NetworkRoom
         }
         private IEnumerator GoToGame()
         {
-            yield return new WaitForSeconds(30);
+            yield return new WaitForSeconds(10);
             ServerChangeScene(GameplayScene);
+
         }
         private void Update()
         {
