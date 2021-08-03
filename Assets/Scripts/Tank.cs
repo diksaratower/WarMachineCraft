@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace Mirror.Examples.Tanks
 {
-    public class Tank : NetworkBehaviour
+    public class Tank : NetworkBehaviour //комментарий для теста git
     {
         [SyncVar] public float hp;
 
