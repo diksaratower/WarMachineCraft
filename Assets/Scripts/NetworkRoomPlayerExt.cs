@@ -40,7 +40,7 @@ public class NetworkRoomPlayerExt : NetworkRoomPlayer
 
             if (!NetworkManager.IsSceneActive(room.RoomScene))
                 return;
-            if (NetworkClient.active && isLocalPlayer)
+            if (NetworkClient.active)// && isLocalPlayer)
             {
                 GUILayout.BeginArea(new Rect(20f + (index * 100), 200f, 90f, 130f));
 
