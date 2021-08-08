@@ -4,14 +4,16 @@ using Mirror;
 
 public class Projectile : NetworkBehaviour
 {
-    public float destroyAfter = 5;
-    public Rigidbody rigidBody;
-    public GameObject efectPrefab;
-    public float force = 1000;
-    public float damage;
+    [SerializeField] private float destroyAfter = 5;
+    [SerializeField] private GameObject efectPrefab;
+    [SerializeField] private float force = 1000;
+    [SerializeField] private float damage;
+
+    private Rigidbody rigidBody;
 
     protected virtual void Start()
     {
+        rigidBody = GetComponent<Rigidbody>();
         StartCoroutine(destroyObj());
         rigidBody.AddForce(transform.forward * force);
     }
@@ -32,7 +34,6 @@ public class Projectile : NetworkBehaviour
             GameObject efect = Instantiate(efectPrefab, transform.position, transform.rotation);
             NetworkServer.Spawn(efect);
         }
-        ///NetworkServer.Destroy(gameObject);
     }
 }
 

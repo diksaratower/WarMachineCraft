@@ -10,8 +10,6 @@ public class RobotUserController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-
-
         if (shootingForTest)
             for (int i = 0; i < weapons.Count; i++)
                 StartCoroutine(weapons[i].Shoot());
@@ -26,7 +24,6 @@ public class RobotUserController : NetworkBehaviour
     [Command]
     public void Cmd_SetShoting(bool val)
     {
-
         shootingForTest = !shootingForTest;
     }
 }

@@ -21,7 +21,6 @@ public class Robot : NetworkBehaviour
     [SerializeField] private GameObject UI;
     [SerializeField] private FloatingJoystick joystick;
 
-
     private void Start()
     {
         if (!isLocalPlayer)
@@ -39,14 +38,11 @@ public class Robot : NetworkBehaviour
         if (!isLocalPlayer) return;
 
 
-        float horizontal = Input.GetAxis("Horizontal");
-        if (joystick) horizontal = joystick.Horizontal;
+        float horizontal = joystick.Horizontal;
+        float vertical = joystick.Vertical;
 
         transform.Rotate(0, horizontal * rotationSpeed * Time.deltaTime, 0);
 
-
-        float vertical = Input.GetAxis("Vertical");
-        if (joystick) vertical = joystick.Vertical;
         Vector3 forward = transform.TransformDirection(Vector3.forward);
 
         controller.Move(forward * vertical * speed);
@@ -59,5 +55,4 @@ public class Robot : NetworkBehaviour
         else
             motorAudio.enabled = false;
     }
-
 }
